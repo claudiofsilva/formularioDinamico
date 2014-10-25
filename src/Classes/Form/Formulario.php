@@ -5,6 +5,7 @@ use Classes\Form\Interfaces\FormularioInterface;
 use Classes\Form\Interfaces\FormularioInputInterface;
 
 class Formulario implements FormularioInterface{
+
     public $action;
     public $method;
     public $input = array();

@@ -5,6 +5,7 @@ use Classes\Form\Interfaces\FormularioInputInterface;
 
 
 class FormularioInput implements FormularioInputInterface{
+
     public $tipo;
     public $name;
     public $value;
