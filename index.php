@@ -4,31 +4,45 @@ require_once 'autoload.php';
 ini_set('display_errors', true);
 error_reporting(E_ALL | E_STRICT);
 
+use Classes\Form\Fieldset\FormularioInput;
 use Classes\Form\Formulario;
-use Classes\Form\FormularioInput;
+use Classes\Form\Fieldset\FormularioOption;
+use Classes\Form\Fieldset\FormularioSelect;
+use Classes\Form\Fieldset\FormularioTextarea;
 
 $formulario = new Formulario();
+
+$formulario->setAction('teste')->setMethod('post');
+
 $input = new FormularioInput();
+$input->setValue('valor1')->setName('name1')->setType('input');
+
 $input2 = new FormularioInput();
+$input2->setValue('valor2')->setName('name2')->setType('input');
+
+$formulario->createField($input);
+$formulario->createField($input2);
+
+$select = new FormularioSelect();
+$select->setName('time');
+
+$option = new FormularioOption();
+$option->setValue(1)->setInnerText("Escolha:");
+
+$option2 = new FormularioOption();
+$option2->setValue(2)->setInnerText('Palmeiras');
+
+$select->addOption($option)->addOption($option2);
+$formulario->createField($select);
+
+$textarea = new FormularioTextarea();
+$textarea->setName('textarea')->setRow(4)->setCols(40);
+
+$formulario->createField($textarea);
+
 $input3 = new FormularioInput();
-
-$formulario->setAction('testeAction')
-           ->setMethod('post');
-$input->setTipo('text')
-      ->setName('input1');
-
-$input2->setTipo('text')
-      ->setName('input2');
-
-$input3->setTipo('submit')
-       ->setName('enviar')
-       ->setValue('Enviar');
-
-
-$formulario->addInput($input);
-$formulario->addInput($input2);
-$formulario->addInput($input3);
-
+$input3->setName('enviar')->setType('submit')->setValue('enviar');
+$formulario->createField($input3);
 
 $form = $formulario->render();
 

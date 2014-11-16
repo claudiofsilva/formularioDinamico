@@ -1,14 +1,15 @@
 <?php
 
 namespace Classes\Form;
+use Classes\Form\Interfaces\FieldsetInterface;
 use Classes\Form\Interfaces\FormularioInterface;
-use Classes\Form\Interfaces\FormularioInputInterface;
 
 class Formulario implements FormularioInterface{
 
     public $action;
     public $method;
     public $input = array();
+
 
     public function setAction($action)
     {
@@ -35,9 +36,9 @@ class Formulario implements FormularioInterface{
         return $this->method;
     }
 
-    public function addInput(FormularioInputInterface $input)
+    public function createField(FieldsetInterface $input)
     {
-        $this->input[] = $input->conteudoInput();
+        $this->input[] = $input->create();
     }
 
     public function getInput()
@@ -72,5 +73,6 @@ class Formulario implements FormularioInterface{
         return $form;
 
     }
+
 
 } 
