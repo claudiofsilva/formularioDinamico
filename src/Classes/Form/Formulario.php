@@ -63,7 +63,7 @@ class Formulario implements FormularioInterface{
 
        if(is_array($this->getInput())){
            foreach($this->getInput() as $input){
-               $form .= "\t \t<div>" .$input."</div>\n";
+               $form .= $input.'</br>';
            }
        }
 

@@ -9,10 +9,16 @@ use Classes\Form\Formulario;
 use Classes\Form\Fieldset\FormularioOption;
 use Classes\Form\Fieldset\FormularioSelect;
 use Classes\Form\Fieldset\FormularioTextarea;
+use Classes\Form\Fieldset\FormularioFieldset;
 
 $formulario = new Formulario();
 
 $formulario->setAction('teste')->setMethod('post');
+
+$fieldset = new FormularioFieldset();
+$fieldset->setType('<fieldset>')->setLegend('Formulário Dinâmico');
+
+$formulario->createField($fieldset);
 
 $input = new FormularioInput();
 $input->setValue('valor1')->setName('name1')->setType('input');
@@ -43,6 +49,11 @@ $formulario->createField($textarea);
 $input3 = new FormularioInput();
 $input3->setName('enviar')->setType('submit')->setValue('enviar');
 $formulario->createField($input3);
+
+$fieldset2 = new FormularioFieldset();
+$fieldset2->setType('</fieldset>');
+
+$formulario->createField($fieldset2);
 
 $form = $formulario->render();
 
