@@ -1,6 +1,11 @@
 <?php
 
 namespace Classes\Form;
+use Classes\Form\Fieldset\FormularioFieldset;
+use Classes\Form\Fieldset\FormularioInput;
+use Classes\Form\Fieldset\FormularioLegend;
+use Classes\Form\Fieldset\FormularioSelect;
+use Classes\Form\Fieldset\FormularioTextarea;
 use Classes\Form\Interfaces\FieldsetInterface;
 use Classes\Form\Interfaces\FormularioInterface;
 
@@ -8,7 +13,8 @@ class Formulario implements FormularioInterface{
 
     public $action;
     public $method;
-    public $input = array();
+    private $field = array();
+    private $fieldset;
 
 
     public function setAction($action)
@@ -36,15 +42,46 @@ class Formulario implements FormularioInterface{
         return $this->method;
     }
 
-    public function createField(FieldsetInterface $input)
+    public function createField(FieldsetInterface $field)
     {
-        $this->input[] = $input->create();
+        if($field instanceof FormularioLegend){
+            $legend = "<legend>{$field->getValue()}</legend>";
+            $this->field[] = $legend;
+        }
+
+        if($field instanceof FormularioInput){
+            $input = "<input type='{$field->getType()}' value='{$field->getValue()}' name='{$field->getName()}'>";
+            $this->field[] = $input;
+        }
+
+        if($field instanceof FormularioSelect){
+
+            $select = "<select>";
+
+            foreach($field->options as $option){
+                $select .= $option;
+            }
+
+            $select .= "</select>";
+
+           $this->field[] = $select;
+        }
+
+        if($field instanceof FormularioTextarea){
+            $textarea = "<textarea rows='{$field->getRow()}' cols='{$field->getCols()}'></textarea>";
+            $this->field[] = $textarea;
+        }
     }
 
-    public function getInput()
+    public function getField()
     {
-        return $this->input;
+        return $this->field;
     }
+
+    public function addFieldset(FormularioFieldset $fieldset){
+        $this->fieldset = $fieldset->createFieldset();
+    }
+
 
     public function render()
     {
@@ -61,18 +98,12 @@ class Formulario implements FormularioInterface{
 
         $form .= ">\n";
 
-       if(is_array($this->getInput())){
-           foreach($this->getInput() as $input){
-               $form .= $input.'</br>';
-           }
-       }
-
+        $form .= $this->fieldset;
 
         $form .= "\t </form>\n";
 
         return $form;
 
     }
-
 
 } 

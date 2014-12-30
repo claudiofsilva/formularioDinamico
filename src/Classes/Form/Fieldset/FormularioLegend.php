@@ -4,31 +4,12 @@ namespace Classes\Form\Fieldset;
 
 
 use Classes\Form\Interfaces\FieldsetInterface;
-use Classes\Form\Interfaces\TextareaInterface;
 
-class FormularioTextarea implements FieldsetInterface, TextareaInterface{
+class FormularioLegend implements FieldsetInterface {
+
     public $type;
-    public $name;
     public $value;
-    public $row;
-    public $cols;
-
-    /**
-     * @param mixed $cols
-     */
-    public function setCols($cols)
-    {
-        $this->cols = $cols;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCols()
-    {
-        return $this->cols;
-    }
+    public $name;
 
     /**
      * @param mixed $name
@@ -48,23 +29,6 @@ class FormularioTextarea implements FieldsetInterface, TextareaInterface{
     }
 
     /**
-     * @param mixed $row
-     */
-    public function setRow($row)
-    {
-        $this->row = $row;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRow()
-    {
-        return $this->row;
-    }
-
-    /**
      * @param mixed $type
      */
     public function setType($type)
@@ -78,7 +42,7 @@ class FormularioTextarea implements FieldsetInterface, TextareaInterface{
      */
     public function getType()
     {
-        return false;
+        return $this->type;
     }
 
     /**
@@ -90,13 +54,12 @@ class FormularioTextarea implements FieldsetInterface, TextareaInterface{
         return $this;
     }
 
-
     /**
      * @return mixed
      */
     public function getValue()
     {
-        return false;
+        return $this->value;
     }
 
 } 

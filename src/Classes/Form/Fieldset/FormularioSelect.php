@@ -70,18 +70,4 @@ class FormularioSelect implements  FieldsetInterface {
         return $this;
     }
 
-    public function create()
-    {
-        $select = "<select name='".$this->getName()."' >";
-
-        foreach($this->options as $optionValue)
-        {
-            $select .= $optionValue;
-        }
-
-        $select .= "</select>";
-
-        return $select;
-    }
-
 } 

@@ -42,30 +42,10 @@ class FormularioInput implements FieldsetInterface{
         return $this;
     }
 
-    public function getValues()
-    {
-        $this->values[] = array('type' => $this->getType(),
-                                'value' => $this->getValue(),
-                                'name' => $this->getName());
-
-        return $this->values;
-    }
-
 
     public function getValue()
     {
         return $this->value;
-    }
-
-    public function create(){
-
-           foreach($this->getValues() as $valores)
-           {
-               $input = "<input type=".$valores['type']." name=".$valores['name']. " value=".$valores['value']. " >";
-           }
-
-           return $input;
-
     }
 
 } 
